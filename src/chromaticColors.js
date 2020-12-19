@@ -1,12 +1,12 @@
-const calculatePoint = (i, intervalSize, colorRangeInfo) {
+const calculatePoint = (i, intervalSize, colorRangeInfo) => {
   var { colorStart, colorEnd, useEndAsStart } = colorRangeInfo;
   return useEndAsStart
     ? colorEnd - i * intervalSize
     : colorStart + i * intervalSize;
-}
+};
 
 /* Must use an interpolated color scale, which has a range of [0, 1] */
-const  interpolateColors = (dataLength, colorScale, colorRangeInfo) {
+const interpolateColors = (dataLength, colorScale, colorRangeInfo) => {
   var { colorStart, colorEnd } = colorRangeInfo;
   var colorRange = colorEnd - colorStart;
   var intervalSize = colorRange / dataLength;
@@ -19,6 +19,6 @@ const  interpolateColors = (dataLength, colorScale, colorRangeInfo) {
   }
 
   return colorArray;
-}  
+};
 
 export default interpolateColors;
