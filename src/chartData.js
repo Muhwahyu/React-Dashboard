@@ -8,6 +8,7 @@ export const chartData = (chartConfig) => {
   // chromatic color data
   const dataLenght = labels.length;
 
+  // sets d3 interpolate color range
   const colorScale = scale;
 
   const randomColor = interpolateColors(dataLenght, colorScale, colorRangeInfo);
