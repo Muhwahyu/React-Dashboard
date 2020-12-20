@@ -10,9 +10,11 @@
 .chart {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 80%;
+  width: 100%;
+  margin: 0;
+  padding: 0 10px;
 }
 
 .App-logo {
