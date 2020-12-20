@@ -2,7 +2,7 @@ import * as d3 from "d3-scale-chromatic";
 import interpolateColors from "./chromaticColors";
 
 export const chartData = (chartConfig) => {
-  const { labels, colorRangeInfo, scale, dataLabel } = chartConfig;
+  const { labels, data, colorRangeInfo, scale, dataLabel } = chartConfig;
   console.log(labels);
 
   // chromatic color data
@@ -18,7 +18,7 @@ export const chartData = (chartConfig) => {
     datasets: [
       {
         label: dataLabel,
-        data: [120, 390, 500, 205, 122, 600, 350, 325],
+        data,
         backgroundColor: randomColor,
         borderColor: randomColor,
         borderWidth: 1,
