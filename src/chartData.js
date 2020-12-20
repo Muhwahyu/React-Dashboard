@@ -22,14 +22,16 @@ const colorRangeInfo = {
   colorEnd: 1,
   useEndAsStart: false,
 };
+// sets d3 interpolate color range
 const colorScale = d3.interpolatePuRd;
 
 const randomColor = interpolateColors(dataLenght, colorScale, colorRangeInfo);
+
 export const chartData = {
   labels: labels,
   datasets: [
     {
-      label: "Value",
+      label: "Data for Past 2 years",
       data: [120, 390, 500, 205, 122, 600, 350, 325],
       backgroundColor: randomColor,
       borderColor: randomColor,
