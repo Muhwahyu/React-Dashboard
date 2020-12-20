@@ -9,9 +9,10 @@
 
 .chart {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* width: 100%; */
+  width: 80%;
 }
 
 .App-logo {
