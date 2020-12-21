@@ -135,6 +135,7 @@ const App = () => {
       colorEnd: 1,
       useEndAsStart: true,
     },
+    //Purples Greens blues
     scale: d3.interpolatePurples,
     dataLabel: "data for doughnut chart",
   });
@@ -147,6 +148,7 @@ const App = () => {
     return (
       <div className={styles.App}>
         <h1>Welcome to my dashboard</h1>
+        {/* <--------------- Controlled Input ---------------> */}
         <ControlledOpenSelect
           updateDashboard={updateDashboard}
           data={initData.DropDownList}
