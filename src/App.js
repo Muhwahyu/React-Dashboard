@@ -6,6 +6,7 @@ import { BarChart, DoughnutChart } from "./Charts";
 import Widget from "./Widgets/Widget";
 // import { fetchData } from "./API";
 
+import ControlledOpenSelect from "./select";
 import styles from "./App.module.css";
 // import { interpolateBlues } from "d3-scale-chromatic";
 
@@ -146,13 +147,10 @@ const App = () => {
     return (
       <div className={styles.App}>
         <h1>Welcome to my dashboard</h1>
-        <select onChange={updateDashboard}>
-          {initData.DropDownList.map((value, index) => (
-            <option key={index + 1} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
+        <ControlledOpenSelect
+          updateDashboard={updateDashboard}
+          data={initData.DropDownList}
+        />
 
         {/* <--------------- Widgets ---------------> */}
         <div className={styles.widget}>

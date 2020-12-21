@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -21,9 +22,13 @@ function CreateWidge(props) {
 
   const classes = useStyles();
   return (
-    <Grid item xs={6} lg={4}>
+    <Grid item sm={6} lg={4} xs={12}>
       <Paper className={classes.paper}>
-        <Typography variant="h3">{props.data}</Typography>
+        <Typography variant="h3">
+          <CountUp start={0} end={props.data} duration={2.5} separator=",">
+            {props.data}
+          </CountUp>
+        </Typography>
         <Typography variant="h5">{props.heading}</Typography>
         <Typography variant="body2">{props.details}</Typography>
       </Paper>
