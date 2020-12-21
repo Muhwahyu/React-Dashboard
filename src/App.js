@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { chartData } from "./chartData";
 import * as d3 from "d3-scale-chromatic";
 
 import { BarChart, DoughnutChart } from "./Charts";
-import { fetchData } from "./API";
+// import { fetchData } from "./API";
 
 import styles from "./App.module.css";
 // import { interpolateBlues } from "d3-scale-chromatic";
@@ -11,9 +11,12 @@ import styles from "./App.module.css";
 const App = () => {
   // <--------------- Data Section --------------->
 
-  const [data, setData] = useState({
+  const [initData, setinitData] = useState({
     items: [],
     DropDownList: [],
+  });
+
+  const [stateData, setData] = useState({
     organicSource: null,
     directSource: null,
     referralSource: null,
@@ -21,6 +24,7 @@ const App = () => {
   });
 
   useEffect(() => {
+    console.log("use effect");
     const config = {
       apiKey: "AIzaSyDMu-Vw30ykPPmFT3cXeunzKEi4EahzglI",
       spreadsheetId: "1vcDPrMexD8bxNwwzK9IxF8wch6Hfezq2eooJACDiqgg",
@@ -29,11 +33,9 @@ const App = () => {
 
     const rows = [];
     let dropDownList = [];
-    // {month, organic sourc, direct source, referral source, email source}
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        //   console.log(data.valueRanges[0].values);
         let batchRowValues = data.valueRanges[0].values;
 
         for (let i = 1; i < batchRowValues.length; i++) {
@@ -46,13 +48,16 @@ const App = () => {
 
         //dropdonw list
         rows.map((arr) => dropDownList.push(arr.month));
-        //   dropDownList = Array.from(new Set(dropDownList)).reverse();
 
-        if (rows.length && dropDownList.length) {
-          setData({
-            ...data,
-            items: rows,
-            DropDownList: dropDownList,
+        if (!rows && !dropDownList) {
+          console.log("not response");
+        } else {
+          setinitData((initData) => {
+            return {
+              ...initData,
+              items: rows,
+              DropDownList: dropDownList,
+            };
           });
         }
       })
@@ -60,18 +65,40 @@ const App = () => {
   }, []);
 
   // const getData = (arg) => {
-  //   if ((rows || dropDownList) && arg === state.selectedValue) {
-  //     setState(() => ({
-  //       ...state,
-  //       items: rows,
-  //       dropDownList,
-  //     }));
+  //   console.log("getdata =>", arg, stateData.selectedValue);
+  //   if (
+  //     initData.items.length > 0 &&
+  //     initData.DropDownList.length > 0 &&
+  //     arg === stateData.selectedValue
+  //   ) {
+  //     console.log("getData", stateData.selectedValue);
   //   }
   // };
 
-  // const updateDashboard = () => {
-  //   getData();
-  // };
+  useEffect(() => {
+    if (initData.items.length > 0 && initData.DropDownList.length > 0) {
+      const arr = initData.items.filter(
+        (item) => item.month === stateData.selectedValue
+      );
+      console.log("data arr =>", arr);
+      setData((stateData) => {
+        return {
+          ...stateData,
+          organicSource: arr[0].organic_source,
+          directSource: arr[0].direct_source,
+          referralSource: arr[0].referral_source,
+        };
+      });
+    }
+  }, [stateData.selectedValue, initData]);
+
+  const updateDashboard = (event) => {
+    const value = event.target.value;
+    setData({
+      ...stateData,
+      selectedValue: value,
+    });
+  };
   // const dataforD = chartData({
   //   labels: ["China", "UAE", "Yemen", "Pakistan", "Saudia"],
   //   data: [120, 390, 500, 205, 122],
@@ -98,27 +125,32 @@ const App = () => {
   // console.log(state.dropDownList);
 
   // <--------------- components here --------------->
-  return (
-    <div className={styles.App}>
-      <h1>Welcome to my dashboard</h1>
-      <select>
-        {data.DropDownList.map((value, index) => (
-          <option key={index + 1} value={value}>
-            {value}
-          </option>
-        ))}
-      </select>
 
-      {/* <--------------- Widgets ---------------> */}
-      <div className={styles.numbers}>something here</div>
+  if (initData.items.length === 0) {
+    return <h1>Fectching data</h1>;
+  } else {
+    return (
+      <div className={styles.App}>
+        <h1>Welcome to my dashboard</h1>
+        <select onChange={updateDashboard}>
+          {initData.DropDownList.map((value, index) => (
+            <option key={index + 1} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
 
-      {/* <--------------- Charts ---------------> */}
-      <div className={styles.chart}>
-        {/* <BarChart data={dataforB} width={100} height={50} /> */}
-        {/* <DoughnutChart data={dataforD} width={100} height={50} /> */}
+        {/* <--------------- Widgets ---------------> */}
+        <div className={styles.numbers}>something here</div>
+
+        {/* <--------------- Charts ---------------> */}
+        <div className={styles.chart}>
+          {/* <BarChart data={dataforB} width={100} height={50} /> */}
+          {/* <DoughnutChart data={dataforD} width={100} height={50} /> */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default App;
