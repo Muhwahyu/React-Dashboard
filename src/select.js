@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     display: "block",
     marginTop: theme.spacing(2),
+    backgroundColor: "#796EB2",
+    color: "#fff",
   },
   formControl: {
     margin: theme.spacing(1),
@@ -38,7 +40,7 @@ export default function ControlledOpenSelect(props) {
   return (
     <div>
       <Button className={classes.button} onClick={handleOpen}>
-        Open the select
+        Select Month
       </Button>
       <FormControl className={classes.formControl}>
         <InputLabel id="select-label">Select Month</InputLabel>
