@@ -1,4 +1,3 @@
-import * as d3 from "d3-scale-chromatic";
 import interpolateColors from "./chromaticColors";
 
 export const chartData = (chartConfig) => {

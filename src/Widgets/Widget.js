@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import CreateWidge from "./createWidge";
 
 function Widget({ data }) {
-  console.log(data);
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,

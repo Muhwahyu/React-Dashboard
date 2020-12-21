@@ -25,7 +25,7 @@ function CreateWidge(props) {
     <Grid item sm={6} lg={4} xs={12}>
       <Paper className={classes.paper}>
         <Typography variant="h3">
-          <CountUp start={0} end={props.data} duration={2.5} separator=",">
+          <CountUp start={0} end={+props.data} duration={2.5} separator=",">
             {props.data}
           </CountUp>
         </Typography>

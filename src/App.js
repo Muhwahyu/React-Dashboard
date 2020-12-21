@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { chartData } from "./chartData";
 import * as d3 from "d3-scale-chromatic";
 
@@ -29,7 +29,6 @@ const App = () => {
   });
 
   useEffect(() => {
-    console.log("use effect");
     const config = {
       apiKey: "AIzaSyDMu-Vw30ykPPmFT3cXeunzKEi4EahzglI",
       spreadsheetId: "1vcDPrMexD8bxNwwzK9IxF8wch6Hfezq2eooJACDiqgg",
@@ -85,7 +84,6 @@ const App = () => {
       const arr = initData.items.filter(
         (item) => item.month === stateData.selectedValue
       );
-      console.log("data arr =>", arr);
       setData((stateData) => {
         return {
           ...stateData,

@@ -20,14 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ControlledOpenSelect(props) {
-  console.log(props, props.data);
   const classes = useStyles();
-  const [age, setAge] = useState("");
   const [open, setOpen] = useState(false);
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -52,8 +46,10 @@ export default function ControlledOpenSelect(props) {
           onOpen={handleOpen}
           value={"Jan 2018"}
           onChange={props.updateDashboard}>
-          {props.data.map((item) => (
-            <MenuItem value={item}>{item}</MenuItem>
+          {props.data.map((item, index) => (
+            <MenuItem key={index + 1} value={item}>
+              {item}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
