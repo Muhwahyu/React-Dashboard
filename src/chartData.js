@@ -3,7 +3,6 @@ import interpolateColors from "./chromaticColors";
 
 export const chartData = (chartConfig) => {
   const { labels, data, colorRangeInfo, scale, dataLabel } = chartConfig;
-  console.log(labels);
 
   // chromatic color data
   const dataLenght = labels.length;
