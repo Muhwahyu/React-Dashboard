@@ -4,7 +4,10 @@
 
 body {
   margin: 0;
+  padding: 0 10px;
   font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #e2dcff;
+  color: #796EB2;
 }

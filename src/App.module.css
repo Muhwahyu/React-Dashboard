@@ -4,7 +4,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #dedede; */
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: auto;
 }
 
 .chart {
@@ -37,4 +39,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.widget {
+  width: 100%;
+  margin: 0;
+  /* padding: 10px; */
 }

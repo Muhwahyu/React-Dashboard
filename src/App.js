@@ -3,6 +3,7 @@ import { chartData } from "./chartData";
 import * as d3 from "d3-scale-chromatic";
 
 import { BarChart, DoughnutChart } from "./Charts";
+import Widget from "./Widgets/Widget";
 // import { fetchData } from "./API";
 
 import styles from "./App.module.css";
@@ -20,6 +21,9 @@ const App = () => {
     organicSource: null,
     directSource: null,
     referralSource: null,
+    sessionsPerUser: null,
+    avgSessionTime: null,
+    pagePerSession: null,
     selectedValue: "Jan 2018",
   });
 
@@ -87,6 +91,9 @@ const App = () => {
           organicSource: arr[0].organic_source,
           directSource: arr[0].direct_source,
           referralSource: arr[0].referral_source,
+          avgSessionTime: arr[0].avg_session_time,
+          sessionsPerUser: arr[0].number_of_sessions_per_users,
+          pagePerSession: arr[0].page_per_session,
         };
       });
     }
@@ -99,30 +106,37 @@ const App = () => {
       selectedValue: value,
     });
   };
-  // const dataforD = chartData({
-  //   labels: ["China", "UAE", "Yemen", "Pakistan", "Saudia"],
-  //   data: [120, 390, 500, 205, 122],
-  //   colorRangeInfo: {
-  //     colorStart: 0.25,
-  //     colorEnd: 0.75,
-  //     useEndAsStart: true,
-  //   },
-  //   scale: d3.interpolateCool,
-  //   dataLabel: "data for doughnut chart",
-  // });
+  const dataforD = chartData({
+    labels: ["Sessions", "Average session time", "Pages per session"],
+    data: [
+      stateData.sessionsPerUser,
+      stateData.avgSessionTime,
+      stateData.pagePerSession,
+    ],
+    colorRangeInfo: {
+      colorStart: 0,
+      colorEnd: 1,
+      useEndAsStart: true,
+    },
+    scale: d3.interpolatePurples,
+    dataLabel: "data for doughnut chart",
+  });
 
-  // const dataforB = chartData({
-  //   labels: state.dropDownList,
-  //   data: state.items[0],
-  //   colorRangeInfo: {
-  //     colorStart: 0,
-  //     colorEnd: 1,
-  //     useEndAsStart: true,
-  //   },
-  //   scale: d3.interpolateCool,
-  //   dataLabel: "data for doughnut chart",
-  // });
-  // console.log(state.dropDownList);
+  const dataforB = chartData({
+    labels: ["organic_source", "refrerral_source", "direct_source"],
+    data: [
+      stateData.organicSource,
+      stateData.referralSource,
+      stateData.directSource,
+    ],
+    colorRangeInfo: {
+      colorStart: 0,
+      colorEnd: 1,
+      useEndAsStart: true,
+    },
+    scale: d3.interpolatePurples,
+    dataLabel: "data for doughnut chart",
+  });
 
   // <--------------- components here --------------->
 
@@ -141,12 +155,14 @@ const App = () => {
         </select>
 
         {/* <--------------- Widgets ---------------> */}
-        <div className={styles.numbers}>something here</div>
+        <div className={styles.widget}>
+          <Widget data={stateData} />
+        </div>
 
         {/* <--------------- Charts ---------------> */}
         <div className={styles.chart}>
-          {/* <BarChart data={dataforB} width={100} height={50} /> */}
-          {/* <DoughnutChart data={dataforD} width={100} height={50} /> */}
+          <BarChart data={dataforB} width={100} height={50} />
+          <DoughnutChart data={dataforD} width={100} height={50} />
         </div>
       </div>
     );
