@@ -4,7 +4,6 @@ import * as d3 from "d3-scale-chromatic";
 
 import { BarChart, DoughnutChart } from "./Charts";
 import Widget from "./Widgets/Widget";
-// import { fetchData } from "./API";
 
 import ControlledOpenSelect from "./select";
 import styles from "./App.module.css";
@@ -67,17 +66,6 @@ const App = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
-  // const getData = (arg) => {
-  //   console.log("getdata =>", arg, stateData.selectedValue);
-  //   if (
-  //     initData.items.length > 0 &&
-  //     initData.DropDownList.length > 0 &&
-  //     arg === stateData.selectedValue
-  //   ) {
-  //     console.log("getData", stateData.selectedValue);
-  //   }
-  // };
 
   useEffect(() => {
     if (initData.items.length > 0 && initData.DropDownList.length > 0) {
@@ -150,6 +138,7 @@ const App = () => {
         <ControlledOpenSelect
           updateDashboard={updateDashboard}
           data={initData.DropDownList}
+          selectedValue={stateData.selectedValue}
         />
 
         {/* <--------------- Widgets ---------------> */}

@@ -44,7 +44,7 @@ export default function ControlledOpenSelect(props) {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={"Jan 2018"}
+          value={props.selectedValue}
           onChange={props.updateDashboard}>
           {props.data.map((item, index) => (
             <MenuItem key={index + 1} value={item}>
